@@ -1,0 +1,23 @@
+we have creted eks cluster minimum with 3node.
+
+All the required r=files, secrutiy,networking and IAM roles are in main.tf file and ekscluster.tf file.
+
+
+command to run:
+
+terraforn init
+
+ this will initialise the task in backend
+
+
+ terraform plan
+   this will plan all the required task that are going to create, by runnig this command we can get to know if any errors in .tf files
+
+terraform apply --auto-approve
+
+  this command will create entire architecture , this will take some time to create all the resources.
+
+
+If we want to destroy,
+
+ terraform destroy --auto-approve, this will destroy entire resouce without any manual interaction.
