@@ -1,0 +1,30 @@
+Application is very simple python application.
+
+created deployment file, service file, config and creted ingress file for hostbase routing.
+
+In this i have crteated two deployment file , both are same for deploying pyhton app, but definig configMap is different.
+
+In deployment.yaml file, i have created env value and assiged config map. Here the problem is if db port value changed then we can't change the value, same value will remain same at application level. If we go inside the pod and check, previous value only disaplayed.
+
+In deployment2.yaml, i have used volume mount, here even if we change the value of port in config.yam, it will reflect in the application, where as defining ENV in deployment file will won't change the value if value of env variable changes.
+
+COMMANDS:
+
+kubectl apply -f deployment.yaml
+
+kubectl apply -f service.yaml
+
+kubectl apply ingress.yaml (if config controller was not installed, even we apply ingress it won't get any external IP)
+
+Note:
+First install Ingress-controller any (nginx here) as per the documentation.
+
+If wewant to check db-port value , then after pods creted successfully go inside the pods by using bellow command
+
+    kubectl exec -it podname /bin/bash
+
+    This will go inside the pod and now we check whether env variable is avaible or not
+
+        env | grep db   --> this will display the port which was given in config map
+
+To expose our application to the outside of the world we need to use external load balancer. These things we need to mention in service file.

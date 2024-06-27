@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-pythonapp
+  labels:
+    app: sample-pythonapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-pythonapp
+  template:
+    metadata:
+      labels:
+        app: sample-pythonapp
+    spec:
+      containers:
+      - name: sample-pythonapp
+        image:  dharma006/pythonapp:v1
+        volumeMounts:
+          - name:  db-config
+            mountPath:  /opt
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8000
+      volumes:
+         - name:  db-config
+           configMap:
+             name:  db-port  

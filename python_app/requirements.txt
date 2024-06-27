@@ -1,0 +1,5 @@
+flaskdocker image
+
+service and deployment yaml and config maps
+
+Ingress controller nad ingress resource
